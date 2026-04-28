@@ -1,5 +1,8 @@
+from typing import Annotated
+from fastapi import Depends # type: ignore
+
 from sqlmodel import create_engine, Session, SQLModel  # type: ignore
-from app.config import settings
+from ..config import settings
 
 engine = create_engine(
     settings.DATABASE_URL,
@@ -15,3 +18,6 @@ def create_db_tables():
 def get_session():
     with Session(engine) as session:
         yield session
+
+
+SessionDep = Annotated[Session, Depends(get_session)]
