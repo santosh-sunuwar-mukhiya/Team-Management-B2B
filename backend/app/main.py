@@ -1,6 +1,8 @@
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from scalar_fastapi import get_scalar_api_reference
+from fastapi import FastAPI # type: ignore
+from scalar_fastapi import get_scalar_api_reference # type: ignore
+from fastapi.middleware.cors import CORSMiddleware # type: ignore
+from .config import settings
+from .api.routers import task, webhooks
 
 
 app = FastAPI(
@@ -10,9 +12,16 @@ app = FastAPI(
 )
 
 
-@app.get("/")
-def root():
-    return {"message": "hello world."}
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[settings.FRONTEND_URL],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(task.router)
+# app.include_router(webhooks.router)
 
 
 # Scalar API Documentation
