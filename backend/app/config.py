@@ -11,12 +11,12 @@ class Setting(BaseSettings):
     CLERK_SECRET_KEY: str
     CLERK_PUBLISHABLE_KEY: str
     CLERK_JWKS_URL: str
-    CLERK_WEBHOOK_SECRET: str
+    CLERK_WEBHOOK_SECRET: str | None = None
     DATABASE_URL: str
     FRONTEND_URL: str
 
     FREE_TIER_LIMIT: int = 2
-    PRO_TIER_MEMBERSHIP_LIMIT = 0  # unlimited.
+    PRO_TIER_MEMBERSHIP_LIMIT: int = 0  # unlimited.
 
     model_config = _base_config
 
