@@ -1,7 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel  # type: ignore
 from typing import Optional
-from app.databases.models import TaskStatus
+from ...databases.models import TaskStatus
 
 
 class TaskCreate(BaseModel):
