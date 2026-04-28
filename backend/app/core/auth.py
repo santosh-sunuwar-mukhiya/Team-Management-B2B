@@ -3,8 +3,8 @@ from typing import Annotated
 import httpx  # type: ignore
 from fastapi import Depends, HTTPException, Request, status  # type: ignore
 from clerk_backend_api.security import AuthenticateRequestOptions  # type: ignore
-from app.core.config import settings  # type: ignore
-from app.core.clerk import clerk
+from ..config import settings  # type: ignore
+from .clerk import clerk
 
 
 class AuthUser:
